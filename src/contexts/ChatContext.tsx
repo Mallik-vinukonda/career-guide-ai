@@ -49,7 +49,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
     if (messages.length === 1 && messages[0].id === '1') {
       setMessages(getInitialMessages(userProfile.name));
     }
-  }, [userProfile.name]);
+  }, [userProfile.name, messages]);
 
   // Load messages from localStorage on initial render
   useEffect(() => {
@@ -58,10 +58,15 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       try {
         const parsedMessages = JSON.parse(savedMessages);
         // Convert string timestamps back to Date objects
-        const messagesWithDates = parsedMessages.map((msg: any) => ({
-          ...msg,
-          timestamp: new Date(msg.timestamp)
-        }));
+        const messagesWithDates = parsedMessages.map((msg: unknown) => {
+          if (typeof msg === 'object' && msg !== null && 'timestamp' in msg) {
+            return {
+              ...(msg as Record<string, unknown>),
+              timestamp: new Date((msg as { timestamp: string }).timestamp)
+            };
+          }
+          return msg;
+        });
         setMessages(messagesWithDates);
       } catch (error) {
         console.error('Error parsing saved messages:', error);

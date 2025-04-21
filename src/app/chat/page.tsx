@@ -15,34 +15,6 @@ interface Message {
   timestamp: Date;
 }
 
-// Sample career data for demonstration
-const SAMPLE_CAREERS = [
-  {
-    title: 'Software Engineer',
-    description: 'Develops applications and systems using programming languages and software development principles.',
-    education: ['Bachelor\'s degree in Computer Science', 'Coding bootcamp (alternative)'],
-    skills: ['Programming', 'Problem-solving', 'Debugging', 'Software design'],
-    salary: '$70,000 - $150,000',
-    outlook: 'Excellent growth potential with 22% projected increase by 2030'
-  },
-  {
-    title: 'Data Scientist',
-    description: 'Analyzes and interprets complex data to help organizations make better decisions.',
-    education: ['Master\'s degree in Data Science', 'Bachelor\'s with specialized certifications'],
-    skills: ['Statistical analysis', 'Machine learning', 'Programming (Python/R)', 'Data visualization'],
-    salary: '$85,000 - $170,000',
-    outlook: 'Very strong growth with 31% projected increase by 2030'
-  },
-  {
-    title: 'Healthcare Administrator',
-    description: 'Manages healthcare facilities, services, and staff to ensure efficient operations.',
-    education: ['Bachelor\'s degree in Healthcare Administration', 'Master\'s degree preferred for advancement'],
-    skills: ['Leadership', 'Communication', 'Healthcare regulations knowledge', 'Financial management'],
-    salary: '$65,000 - $120,000',
-    outlook: 'Strong growth with 32% projected increase by 2030'
-  }
-];
-
 export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -106,6 +78,19 @@ export default function ChatPage() {
       
       if (response.ok) {
         const data = await response.json();
+        if (data.error) {
+          setMessages(prev => [
+            ...prev,
+            {
+              id: (Date.now() + 1).toString(),
+              role: 'assistant',
+              content: `⚠️ ${data.error}`,
+              timestamp: new Date()
+            }
+          ]);
+          setIsLoading(false);
+          return;
+        }
         const assistantMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: 'assistant',
@@ -119,7 +104,17 @@ export default function ChatPage() {
       }
     } catch (error) {
       console.error('Error calling API:', error);
-      // Fall back to local responses if API fails
+      setMessages(prev => [
+        ...prev,
+        {
+          id: (Date.now() + 2).toString(),
+          role: 'assistant',
+          content: '⚠️ AI service is currently unavailable. Please try again later.',
+          timestamp: new Date()
+        }
+      ]);
+      setIsLoading(false);
+      return;
     }
     
     // Fallback: Generate response locally if API fails

@@ -2,24 +2,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { FaArrowLeft, FaArrowRight, FaCheck, FaUpload } from 'react-icons/fa';
+import { FaArrowLeft, FaArrowRight, FaCheck } from 'react-icons/fa';
 
 // Define the steps in the onboarding process - simplified for children
 type OnboardingStep = 'about-me' | 'favorites' | 'school' | 'complete';
-
-// Child-friendly interest options
-const INTEREST_OPTIONS = [
-  'Computers & Technology', 'Science & Experiments', 'Helping People', 'Art & Drawing', 
-  'Building Things', 'Reading & Writing', 'Animals & Nature', 'Sports & Games',
-  'Music & Dancing', 'Math & Puzzles', 'Cooking & Food', 'Other'
-];
-
-// Child-friendly skill options
-const SKILL_OPTIONS = [
-  'Solving Problems', 'Talking to People', 'Being Creative', 'Working with Computers',
-  'Building and Making Things', 'Taking Care of Animals', 'Sports & Being Active',
-  'Drawing & Art', 'Reading & Learning', 'Helping Others', 'Other'
-];
 
 // Child-friendly school subjects
 const SUBJECT_OPTIONS = [
@@ -33,11 +19,7 @@ export default function OnboardingPage() {
     name: '',
     age: '',
     grade: '',
-    interests: [] as string[],
-    skills: [] as string[],
     favoriteSubjects: [] as string[],
-    otherInterests: '',
-    otherSkills: '',
     otherSubjects: '',
     schoolName: '',
     teacherName: '',
@@ -47,28 +29,14 @@ export default function OnboardingPage() {
   // Handle input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    
-    // Handle nested objects in the form data
-    if (name.includes('.')) {
-      const [parent, child] = name.split('.');
-      setFormData(prev => {
-        const updatedProfile = { ...prev };
-        const parentKey = parent as keyof typeof prev;
-        const parentObj = { ...updatedProfile[parentKey] as Record<string, any> };
-        parentObj[child] = value;
-        updatedProfile[parentKey] = parentObj as any;
-        return updatedProfile;
-      });
-    } else {
-      setFormData(prev => ({
-        ...prev,
-        [name]: value
-      }));
-    }
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   // Handle checkbox changes for multi-select options
-  const handleCheckboxChange = (category: 'interests' | 'skills', value: string) => {
+  const handleCheckboxChange = (category: 'favoriteSubjects', value: string) => {
     setFormData(prev => {
       const currentValues = prev[category];
       
@@ -82,14 +50,6 @@ export default function OnboardingPage() {
       
       return prev;
     });
-  };
-
-  // Handle file upload
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // We're not storing file uploads in this simplified version
-    // If needed, you could add a resumeFile property to the formData state
-    console.log('File selected:', e.target.files?.[0]?.name);
-    // For demonstration purposes only - not actually storing the file
   };
 
   // Navigate to next step
@@ -142,7 +102,7 @@ export default function OnboardingPage() {
       case 'about-me':
         return formData.name.trim() !== '';
       case 'favorites':
-        // Allow proceeding even if no interests/skills are selected
+        // Allow proceeding even if no subjects are selected
         return true;
       case 'school':
         // Allow proceeding even if no subjects are selected
@@ -337,7 +297,7 @@ export default function OnboardingPage() {
         
         <div>
           <label htmlFor="teacherName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Teacher's Name
+            Teacher&apos;s Name
           </label>
           <input
             type="text"
@@ -345,7 +305,7 @@ export default function OnboardingPage() {
             name="teacherName"
             value={formData.teacherName || ''}
             onChange={handleInputChange}
-            placeholder="Enter your teacher's name"
+            placeholder="Enter your teacher&apos;s name"
             className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
           />
         </div>
@@ -397,10 +357,6 @@ export default function OnboardingPage() {
       </div>
     );
   };
-  
-  // No more commented-out code blocks - they've been removed to fix errors
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -428,7 +384,7 @@ export default function OnboardingPage() {
             
             {currentStep !== 'complete' && (
               <div className="flex justify-between mt-6">
-                {currentStep !== 'personal' ? (
+                {currentStep !== 'about-me' ? (
                   <button
                     type="button"
                     onClick={handlePreviousStep}
@@ -440,7 +396,7 @@ export default function OnboardingPage() {
                   <div></div> // Empty div for spacing
                 )}
                 
-                {currentStep !== 'goals' ? (
+                {currentStep !== 'school' ? (
                   <button
                     type="button"
                     onClick={handleNextStep}

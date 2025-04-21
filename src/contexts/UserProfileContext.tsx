@@ -116,7 +116,7 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
       
       // Save to localStorage (without the File object)
       const profileForStorage = { ...updatedProfile };
-      delete (profileForStorage as any).resumeFile;
+      delete (profileForStorage as Record<string, unknown>).resumeFile;
       localStorage.setItem('userProfile', JSON.stringify(profileForStorage));
       
       // Check if profile is now complete

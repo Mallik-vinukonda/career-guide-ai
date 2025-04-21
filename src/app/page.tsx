@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { FaGraduationCap, FaBriefcase, FaChartLine } from "react-icons/fa";
 import { MdExplore } from "react-icons/md";
@@ -38,10 +37,10 @@ export default function Home() {
               </div>
               <div className="space-y-4 mb-4">
                 <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg rounded-tl-none max-w-[80%]">
-                  <p className="text-gray-800 dark:text-gray-200">Hi there! I'm your personal career guidance assistant. How can I help you today?</p>
+                  <p className="text-gray-800 dark:text-gray-200">Hi there! I&apos;m your personal career guidance assistant. How can I help you today?</p>
                 </div>
                 <div className="bg-blue-100 dark:bg-blue-900 p-3 rounded-lg rounded-tr-none max-w-[80%] ml-auto">
-                  <p className="text-blue-800 dark:text-blue-200">I'm interested in careers that combine technology and healthcare.</p>
+                  <p className="text-blue-800 dark:text-blue-200">I&apos;m interested in careers that combine technology and healthcare.</p>
                 </div>
                 <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg rounded-tl-none max-w-[80%]">
                   <p className="text-gray-800 dark:text-gray-200">Great choice! Some options include Health Informatics, Biomedical Engineering, Medical Software Development, and Telemedicine. Would you like to explore any of these in detail?</p>
@@ -101,7 +100,7 @@ export default function Home() {
             <span className="text-xl font-bold text-gray-900 dark:text-white">Career Guide AI</span>
           </div>
           <div className="text-gray-500 dark:text-gray-400 text-sm">
-            © {new Date().getFullYear()} Career Guide AI. All rights reserved.
+            &copy; {new Date().getFullYear()} Career Guide AI. All rights reserved.
           </div>
         </div>
       </footer>

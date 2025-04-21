@@ -310,7 +310,7 @@ export default function DashboardPage() {
                     </div>
                     <div>
                       <h4 className="text-sm font-medium text-gray-900 dark:text-white">Careers Explored</h4>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">You've viewed detailed information about 3 careers</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">You&apos;ve viewed detailed information about 3 careers</p>
                     </div>
                   </div>
                   <span className="text-2xl font-bold text-gray-900 dark:text-white">3</span>
@@ -323,7 +323,7 @@ export default function DashboardPage() {
                     </div>
                     <div>
                       <h4 className="text-sm font-medium text-gray-900 dark:text-white">Education Pathways</h4>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">You've researched 2 education options</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">You&apos;ve researched 2 education options</p>
                     </div>
                   </div>
                   <span className="text-2xl font-bold text-gray-900 dark:text-white">2</span>
@@ -336,7 +336,7 @@ export default function DashboardPage() {
                     </div>
                     <div>
                       <h4 className="text-sm font-medium text-gray-900 dark:text-white">Saved Resources</h4>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">You've saved 0 resources for later reference</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">You&apos;ve saved 0 resources for later reference</p>
                     </div>
                   </div>
                   <span className="text-2xl font-bold text-gray-900 dark:text-white">0</span>
