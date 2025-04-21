@@ -61,31 +61,6 @@ npm run dev
 yarn dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the application
-
-## Project Structure
-
-```
-career-guidance-bot/
-├── src/
-│   ├── app/
-│   │   ├── page.tsx (Landing page)
-│   │   ├── chat/page.tsx (Main chat interface)
-│   │   ├── onboarding/page.tsx (User profile setup)
-│   │   ├── dashboard/page.tsx (User progress tracking)
-│   │   ├── api/chat/route.ts (Chat API endpoint)
-│   │   └── layout.tsx (Main layout)
-│   ├── contexts/
-│   │   ├── UserProfileContext.tsx (User profile state management)
-│   │   └── ChatContext.tsx (Chat state management)
-│   └── lib/
-│       └── utils/
-│           └── vector-store.ts (Simulated vector database)
-├── public/
-│   └── (static assets)
-└── package.json
-```
-
 ## Key Components
 
 ### Vector Database
@@ -155,10 +130,6 @@ Improve the AI responses by:
 1. Fine-tuning the Gemini model on career guidance data
 2. Implementing more sophisticated prompt engineering
 3. Adding more context from the user profile
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Acknowledgments
 
